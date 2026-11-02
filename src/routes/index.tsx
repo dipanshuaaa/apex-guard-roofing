@@ -11,19 +11,7 @@ const FONT_FACES = [400, 500, 600, 700]
 
 import { createFileRoute } from '@tanstack/react-router'
 import React, { useState, useEffect } from 'react';
-import { 
-  ShieldCheck, 
-  Wrench, 
-  Home, 
-  CheckCircle2, 
-  Star, 
-  ArrowRight,
-  CreditCard, 
-  Lock,
-  Calculator,
-  Sliders,
-  Sparkles
-} from 'lucide-react';
+import { PaymentElement, BrandingElement, ExpressCheckoutElement } from '@whop/elements-react';
 
 export const Route = createFileRoute('/')({ component: HomeView })
 
@@ -241,11 +229,24 @@ function HomeView() {
 
       {checkoutModalOpen && selectedPlan && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 space-y-4">
-            <h3 className="text-lg font-bold text-white">{selectedPlan.name}</h3>
-            <div className="text-2xl font-extrabold text-emerald-400">${selectedPlan.price.toLocaleString()}</div>
-            <button onClick={() => { alert('Checkout successful!'); setCheckoutModalOpen(false); }} className="w-full py-3 bg-emerald-600 text-white rounded-xl font-semibold">Complete Checkout</button>
-            <button onClick={() => setCheckoutModalOpen(false)} className="w-full py-2 bg-slate-800 text-slate-300 rounded-xl text-sm">Cancel</button>
+          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 space-y-6">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+              <div>
+                <span className="text-xs text-emerald-400 font-semibold uppercase tracking-wider">Whop Payment Elements</span>
+                <h3 className="text-xl font-bold text-white">{selectedPlan.name}</h3>
+              </div>
+              <button onClick={() => setCheckoutModalOpen(false)} className="text-slate-400 hover:text-white text-sm font-bold px-3 py-1 bg-slate-800 rounded-lg">✕</button>
+            </div>
+
+            <div className="space-y-4">
+              <BrandingElement />
+              <ExpressCheckoutElement amount={selectedPlan.price} currency="USD" />
+              <PaymentElement amount={selectedPlan.price} currency="USD" />
+            </div>
+
+            <button onClick={() => { alert('Checkout completed successfully!'); setCheckoutModalOpen(false); }} className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-semibold">
+              Complete Payment (${selectedPlan.price.toLocaleString()})
+            </button>
           </div>
         </div>
       )}
