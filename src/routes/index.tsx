@@ -1,16 +1,18 @@
 import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/')({ component: Home })
-
-const FONT_FACES = [400, 500, 600, 700]
-  .map(
-    (weight) =>
-      `@font-face{font-family:'Inter Display';font-weight:${weight};font-display:swap;src:url(https://content.whop.com/fonts/inter-display-${{ 400: 'regular', 500: 'medium', 600: 'semi-bold', 700: 'bold' }[weight]}.ttf) format('truetype')}`,
-  )
-  .join('')
-
-import { createFileRoute } from '@tanstack/react-router'
 import React, { useState, useEffect } from 'react';
+import { 
+  ShieldCheck, 
+  Wrench, 
+  Home as HomeIcon, 
+  CheckCircle2, 
+  Star, 
+  ArrowRight,
+  CreditCard, 
+  Lock,
+  Calculator,
+  Sliders,
+  Sparkles
+} from 'lucide-react';
 import { PaymentElement, BrandingElement, ExpressCheckoutElement } from '@whop/elements-react';
 
 export const Route = createFileRoute('/')({ component: HomeView })
