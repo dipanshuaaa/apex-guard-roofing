@@ -13,7 +13,8 @@ import {
   Sliders,
   Sparkles
 } from 'lucide-react';
-import { PaymentElement, BrandingElement, ExpressCheckoutElement } from '@whop/elements-react';
+import { loadWhop } from '@whop/elements';
+import { WhopElements, PaymentElement, BrandingElement, ExpressCheckoutElement } from '@whop/elements-react';
 
 export const Route = createFileRoute('/')({ component: HomeView })
 
@@ -241,9 +242,11 @@ function HomeView() {
             </div>
 
             <div className="space-y-4">
-              <BrandingElement />
-              <ExpressCheckoutElement amount={selectedPlan.price} currency="USD" />
-              <PaymentElement amount={selectedPlan.price} currency="USD" />
+              <WhopElements elements={loadWhop()}>
+                <BrandingElement />
+                <ExpressCheckoutElement amount={selectedPlan.price} currency="USD" />
+                <PaymentElement amount={selectedPlan.price} currency="USD" />
+              </WhopElements>
             </div>
 
             <button onClick={() => { alert('Checkout completed successfully!'); setCheckoutModalOpen(false); }} className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-semibold">
